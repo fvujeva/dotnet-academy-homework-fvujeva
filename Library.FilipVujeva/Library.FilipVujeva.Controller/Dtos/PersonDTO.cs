@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="PersonDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -15,7 +15,7 @@ namespace Library.FilipVujeva.Contracts.Dtos
     public class PersonDTO
     {
         /// <summary name = "FirstName"> Gets or sets FirstName parameter in DTO object.</summary>
-        [Required(ErrorMessage ="You have to provide First Name")]
+        [Required(ErrorMessage = "You have to provide First Name")]
         [StringLength(20)]
         public string? FirstName { get; set; }
 

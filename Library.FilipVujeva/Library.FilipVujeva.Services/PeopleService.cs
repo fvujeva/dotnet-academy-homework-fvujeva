@@ -1,15 +1,9 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="PeopleService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // <author>Filip Vujeva</author>
 //-----------------------------------------------------------------------
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Library.FilipVujeva.Contracts.Dtos;
 using Library.FilipVujeva.Contracts.Entities;
 using Library.FilipVujeva.Contracts.Services;
@@ -64,7 +58,7 @@ namespace Library.FilipVujeva.Services
         /// <inheritdoc/>
         public Person GetPersonById(int id)
         {
-            Person myQuery = context.AsQueryable().Where((person) => person.Id.Equals(id)).FirstOrDefault();
+            Person? myQuery = context.AsQueryable().Where((person) => person.Id.Equals(id)).FirstOrDefault();
 
             return myQuery;
         }
@@ -86,7 +80,8 @@ namespace Library.FilipVujeva.Services
             };
             p1.Adress = adress1;
 
-            Person p2 = new Person() {
+            Person p2 = new Person()
+            {
                 Id = 13,
                 FirstName = "Ivo",
                 LastName = "Ivic",
