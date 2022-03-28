@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="PeopleController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
@@ -35,9 +35,9 @@ namespace Library.FilipVujeva.API.Controllers
         /// <summary> Gets all people from DB service.</summary>
         /// <returns>Returns IActionResult.</returns>
         [HttpGet("all")]
-        public IActionResult GetAllPeople()
+        public async Task<IActionResult> GetAllPeople()
         {
-            var allPeople = this.peopleService.GetAllPeople();
+            var allPeople = await this.peopleService.GetAllPeople();
             return this.Ok(allPeople);
         }
 
@@ -47,9 +47,9 @@ namespace Library.FilipVujeva.API.Controllers
         /// <param name="id">Accepts int id as parameter.</param>
         /// <returns>Returns IActionResult.</returns>
         [HttpGet("{id}")]
-        public IActionResult GetWithId([FromRoute] int id)
+        public async Task<IActionResult> GetWithId([FromRoute] int id)
         {
-            var personQuery = this.peopleService.GetPersonById(id);
+            var personQuery = await this.peopleService.GetPersonById(id);
             return this.Ok(personQuery);
         }
 
@@ -59,9 +59,9 @@ namespace Library.FilipVujeva.API.Controllers
         /// <param name="city">Accepts int id as parameterfrom Query.</param>
         /// <returns>Returns IActionResult.</returns>
         [HttpGet]
-        public IActionResult GetWithCity([FromQuery] string city)
+        public async Task<IActionResult> GetWithCity([FromQuery] string city)
         {
-            var personQuery = this.peopleService.GetPersonByCity(city);
+            var personQuery = await this.peopleService.GetPersonByCity(city);
             return this.Ok(personQuery);
         }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.FilipVujeva.Data.Db.Repositories
 {
-    internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly DbSet<TEntity> _context;
 

@@ -4,7 +4,12 @@
 // </copyright>
 // <author>Filip Vujeva</author>
 //-----------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
 using Library.FilipVujeva.API;
+using Library.FilipVujeva.Contracts.Entities;
+using Library.FilipVujeva.Data.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +22,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.IPeopleService, Library.FilipVujeva.Services.PeopleService>();
 
-builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.IPeopleService, Library.FilipVujeva.Services.PeopleService>();
+builder.Services.AddScoped<Library.FilipVujeva.Contracts.Repositories.IUnitOfWork, Library.FilipVujeva.Data.Db.Repositories.UnitOfWork>();
+
+builder.Services.AddScoped<Library.FilipVujeva.Contracts.Repositories.IRepository<Person>, Library.FilipVujeva.Data.Db.Repositories.Repository<Person>>();
+
+builder.Services.AddScoped<DbContext, ApplicationDbContext>();
+
+builder.Services.AddScoped<IList<Person>, List<Person>>();
 
 IoC.ConfigureDependencies(builder.Services, builder.Configuration);
 

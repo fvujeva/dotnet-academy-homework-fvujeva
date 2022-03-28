@@ -16,17 +16,17 @@ namespace Library.FilipVujeva.Contracts.Services
     {
         /// <summary name = "GetAllPeople"> Gets all people from DB context.</summary>
         /// <returns>Returns List of Person.</returns>
-        public List<Person> GetAllPeople();
+        public Task<IList<Person>> GetAllPeople();
 
         /// <summary name = "GetPersonById"> Gets all people from DB context with int id.</summary>
         /// <param name="id">Accepts int id as parameter.</param>
         /// <returns>Returns Person.</returns>
-        public Person GetPersonById(int id);
+        public Task<Person> GetPersonById(int id);
 
         /// <summary name = "GetPersonByCity"> Gets all people from DB context with string city.</summary>
         /// <param name="city">Accepts string city as parameter.</param>
         /// <returns>Returns List of Person.</returns>
-        public List<Person> GetPersonByCity(string city);
+        public Task<IList<Person>> GetPersonByCity(string city);
 
         /// <summary name = "AddPerson"> Puts PersonDTO in DB context.</summary>
         /// <param name="personDTO">Accepts PersonDTO as parameter.</param>

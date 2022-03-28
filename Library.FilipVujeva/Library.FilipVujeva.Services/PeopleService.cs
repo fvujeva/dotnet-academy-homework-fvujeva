@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 using Library.FilipVujeva.Contracts.Dtos;
 using Library.FilipVujeva.Contracts.Entities;
+using Library.FilipVujeva.Contracts.Repositories;
 using Library.FilipVujeva.Contracts.Services;
 
 namespace Library.FilipVujeva.Services
@@ -15,16 +16,15 @@ namespace Library.FilipVujeva.Services
     /// </summary>
     public class PeopleService : IPeopleService
     {
-        private readonly List<Person> context;
+        private readonly IUnitOfWork context;
         private int ids;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PeopleService"/> class.
         /// </summary>
-        public PeopleService()
+        public PeopleService(IUnitOfWork unitOfWork)
         {
-            this.context = ContextInitializer();
-            this.ids = 0;
+            this.context = unitOfWork;
         }
 
         /// <inheritdoc/>
@@ -37,66 +37,32 @@ namespace Library.FilipVujeva.Services
                 FirstName = personDTO.FirstName,
                 LastName = personDTO.LastName,
             };
-            this.context.Add(person);
+            this.context.People.Add(person);
             this.ids++;
         }
 
         /// <inheritdoc/>
-        public List<Person> GetAllPeople()
+        public async Task<IList<Person>> GetAllPeople()
         {
-            return this.context;
+            var allPeople = await this.context.People.GetAllAsync();
+
+            return allPeople;
         }
 
         /// <inheritdoc/>
-        public List<Person> GetPersonByCity(string city)
+        public async Task<IList<Person>> GetPersonByCity(string city)
         {
-            List<Person> myQuery = this.context.AsQueryable().Where((person) => person.Adress.City.Equals(city)).ToList();
+            var allPeople = await this.context.People.GetAllAsync();
 
-            return myQuery;
+            return allPeople.AsQueryable().Where((person) => person.Adress.City.Equals(city)).ToList();
         }
 
         /// <inheritdoc/>
-        public Person GetPersonById(int id)
+        public async Task<Person> GetPersonById(int id)
         {
-            Person? myQuery = context.AsQueryable().Where((person) => person.Id.Equals(id)).FirstOrDefault();
+            var allPeople = await this.context.People.GetAllAsync();
 
-            return myQuery;
-        }
-
-        private static List<Person> ContextInitializer()
-        {
-            List<Person> list = new List<Person>();
-            Person p1 = new Person()
-            {
-                Id = 12,
-                FirstName = "Pero",
-                LastName = "Peric",
-            };
-            Adress adress1 = new Adress()
-            {
-                Street = "Ilica",
-                City = "Zagreb",
-                Country = "Hrvatska",
-            };
-            p1.Adress = adress1;
-
-            Person p2 = new Person()
-            {
-                Id = 13,
-                FirstName = "Ivo",
-                LastName = "Ivic",
-            };
-            Adress adress2 = new Adress()
-            {
-                Street = "Bosutska",
-                City = "Vinkovci",
-                Country = "Hrvatska",
-            };
-            p2.Adress = adress2;
-
-            list.Add(p1);
-            list.Add(p2);
-            return list;
+            return allPeople.AsQueryable().Where((person) => person.Id.Equals(id)).FirstOrDefault();
         }
     }
 }
