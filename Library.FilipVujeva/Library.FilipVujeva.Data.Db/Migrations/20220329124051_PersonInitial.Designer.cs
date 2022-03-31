@@ -4,6 +4,7 @@ using Library.FilipVujeva.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.FilipVujeva.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220329124051_PersonInitial")]
+    partial class PersonInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Library.FilipVujeva.Data.Db.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Address", b =>
+            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Adress", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,20 +34,17 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Adress");
                 });
 
             modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Person", b =>
@@ -257,7 +257,7 @@ namespace Library.FilipVujeva.Data.Db.Migrations
 
             modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Person", b =>
                 {
-                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Address", "Adress")
+                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Adress", "Adress")
                         .WithOne("Person")
                         .HasForeignKey("Library.FilipVujeva.Contracts.Entities.Person", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -317,7 +317,7 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Address", b =>
+            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Adress", b =>
                 {
                     b.Navigation("Person")
                         .IsRequired();

@@ -4,24 +4,35 @@
 // </copyright>
 // <author>Filip Vujeva</author>
 //-----------------------------------------------------------------------
+using Microsoft.AspNetCore.Identity;
 
 namespace Library.FilipVujeva.Contracts.Entities
 {
     /// <summary>
     /// Person entity, represents smallest entity in hierarchy and has just the basic attributes.
     /// </summary>
-    public class Person
+    public class Person : IdentityUser<int>
     {
-        /// <summary name = "Id"> Gets or sets Id.</summary>
-        public int Id { get; set; }
+        public string FirstName { get; set; } = default!;
 
-        /// <summary name = "FirstName"> Gets or sets FirstName parameter.</summary>
-        public string? FirstName { get; set; }
+        public string LastName { get; set; } = default!;
 
-        /// <summary name = "LastName"> Gets or sets LastName parameter.</summary>
-        public string? LastName { get; set; }
+        public Address Adress { get; set; } = default!;
 
-        /// <summary name = "Adress"> Gets or sets Adress parameter.</summary>
-        public Adress? Adress { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
+
+        public Person()
+        {
+        }
+
+        public Person(string firstName, string lastName, string email, string street, string city, string country)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Address adress = new(street, city, country, this);
+            this.Adress = adress;
+            UserName = firstName;
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Library.FilipVujeva.API;
 using Library.FilipVujeva.Contracts.Entities;
 using Library.FilipVujeva.Data.Configurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ builder.Services.AddScoped<DbContext, ApplicationDbContext>();
 builder.Services.AddScoped<IList<Person>, List<Person>>();
 
 IoC.ConfigureDependencies(builder.Services, builder.Configuration);
+IoC.ConfigureServicesDependencies(builder.Services, builder.Configuration);
+IoC.ConfigureIdentityDependencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
@@ -43,6 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
