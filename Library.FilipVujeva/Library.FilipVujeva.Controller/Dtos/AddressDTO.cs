@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Library.FilipVujeva.Contracts.Attributes;
 
 namespace Library.FilipVujeva.Contracts.Dtos
 {

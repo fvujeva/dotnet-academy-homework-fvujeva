@@ -4,7 +4,8 @@ namespace Library.FilipVujeva.Contracts.Repositories
 {
     public interface IUnitOfWork
     {
-        IRepository<Person> People { get; }
+        IPersonRepository People { get; }
+        IRepository<Book> Books { get; }
 
         Task SaveChangesAsync();
     }

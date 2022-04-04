@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Library.FilipVujeva.Contracts.Attributes;
 using Library.FilipVujeva.Contracts.Dtos;
 
 namespace Library.FilipVujeva.Contracts.Requests
@@ -18,6 +19,7 @@ namespace Library.FilipVujeva.Contracts.Requests
         public string Password { get; set; } = default!;
 
         [Required(ErrorMessage = "Adress is required")]
+        [UsaAddress]
         public AddressDTO Address { get; set; } = default!;
     }
 }

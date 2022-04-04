@@ -7,7 +7,8 @@ namespace Library.FilipVujeva.Data.Db.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IRepository<Person> _people;
+        private readonly IPersonRepository _people;
+        private readonly IRepository<Book> _books;
         private readonly DbContext _dbContext;
 
         public UnitOfWork(ApplicationDbContext context)
@@ -15,8 +16,11 @@ namespace Library.FilipVujeva.Data.Db.Repositories
             _dbContext = context;
         }
 
-        public IRepository<Person> People
-            => _people ?? new Repository<Person>(_dbContext);
+        public IPersonRepository People
+            => _people ?? new PersonRepository(_dbContext);
+
+        public IRepository<Book> Books
+            => _books ?? new Repository<Book>(_dbContext);
 
         public async Task SaveChangesAsync()
         {

@@ -1,3 +1,5 @@
+using Library.FilipVujeva.Contracts.Entities;
+
 namespace Library.FilipVujeva.Contracts.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
@@ -7,8 +9,6 @@ namespace Library.FilipVujeva.Contracts.Repositories
         public Task<TEntity?> GetAsync(int id);
 
         public void Add(TEntity entity);
-
-        public void Update(TEntity entity);
 
         public void Delete(TEntity entity);
     }

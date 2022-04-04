@@ -4,12 +4,9 @@
 // </copyright>
 // <author>Filip Vujeva</author>
 //-----------------------------------------------------------------------
-using System.Collections;
-using System.Collections.Generic;
 using Library.FilipVujeva.API;
 using Library.FilipVujeva.Contracts.Entities;
 using Library.FilipVujeva.Data.Configurations;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,13 +16,13 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.IPeopleService, Library.FilipVujeva.Services.PeopleService>();
+builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.ILibraryService, Library.FilipVujeva.Services.LibraryService>();
 
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Repositories.IUnitOfWork, Library.FilipVujeva.Data.Db.Repositories.UnitOfWork>();
 
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Repositories.IRepository<Person>, Library.FilipVujeva.Data.Db.Repositories.Repository<Person>>();
+builder.Services.AddScoped<Library.FilipVujeva.Contracts.Repositories.IPersonRepository, Library.FilipVujeva.Data.Db.Repositories.PersonRepository>();
 
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
 

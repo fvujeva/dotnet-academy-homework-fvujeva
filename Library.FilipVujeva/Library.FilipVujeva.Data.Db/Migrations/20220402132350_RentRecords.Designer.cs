@@ -4,6 +4,7 @@ using Library.FilipVujeva.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.FilipVujeva.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220402132350_RentRecords")]
+    partial class RentRecords
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,6 +152,29 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.RentRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("RentRecord");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -282,21 +308,6 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RentRecord", b =>
-                {
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookId", "PersonId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("RentRecord");
-                });
-
             modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Person", b =>
                 {
                     b.HasOne("Library.FilipVujeva.Contracts.Entities.Address", "Adress")
@@ -306,6 +317,25 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                         .IsRequired();
 
                     b.Navigation("Adress");
+                });
+
+            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.RentRecord", b =>
+                {
+                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Book", "Book")
+                        .WithMany("RentRecords")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Person", "Person")
+                        .WithMany("RentRecords")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -359,25 +389,20 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RentRecord", b =>
-                {
-                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Person", null)
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Address", b =>
                 {
                     b.Navigation("Person")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Book", b =>
+                {
+                    b.Navigation("RentRecords");
+                });
+
+            modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Person", b =>
+                {
+                    b.Navigation("RentRecords");
                 });
 #pragma warning restore 612, 618
         }
