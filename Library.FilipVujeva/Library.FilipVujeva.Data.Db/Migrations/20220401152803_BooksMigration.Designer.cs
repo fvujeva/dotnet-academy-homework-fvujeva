@@ -4,6 +4,7 @@ using Library.FilipVujeva.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.FilipVujeva.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220401152803_BooksMigration")]
+    partial class BooksMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,21 +285,6 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RentRecord", b =>
-                {
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookId", "PersonId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("RentRecord");
-                });
-
             modelBuilder.Entity("Library.FilipVujeva.Contracts.Entities.Person", b =>
                 {
                     b.HasOne("Library.FilipVujeva.Contracts.Entities.Address", "Adress")
@@ -355,21 +343,6 @@ namespace Library.FilipVujeva.Data.Db.Migrations
                     b.HasOne("Library.FilipVujeva.Contracts.Entities.Person", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RentRecord", b =>
-                {
-                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Library.FilipVujeva.Contracts.Entities.Person", null)
-                        .WithMany()
-                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

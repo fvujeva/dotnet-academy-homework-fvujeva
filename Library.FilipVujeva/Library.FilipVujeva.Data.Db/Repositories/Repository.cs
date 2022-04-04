@@ -1,3 +1,5 @@
+using System.Linq;
+using Library.FilipVujeva.Contracts.Entities;
 using Library.FilipVujeva.Contracts.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -5,7 +7,7 @@ namespace Library.FilipVujeva.Data.Db.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly DbSet<TEntity> _context;
+        protected readonly DbSet<TEntity> _context;
 
         public Repository(DbContext dbContext)
         {
@@ -33,10 +35,6 @@ namespace Library.FilipVujeva.Data.Db.Repositories
         public async Task<TEntity?> GetAsync(int id)
         {
             return await _context.FindAsync(id);
-        }
-
-        public void Update(TEntity entity)
-        {
         }
     }
 }
