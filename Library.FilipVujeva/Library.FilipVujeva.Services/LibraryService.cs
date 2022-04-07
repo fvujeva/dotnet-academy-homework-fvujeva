@@ -33,9 +33,14 @@ namespace Library.FilipVujeva.Services
 
             var person = await _context.People.GetWithRentedBooksById(personId);
 
+            if (book == null)
+            {
+                throw new EntityNotFoundException("That books does not exist in our library!");
+            }
+
             if (person == null)
             {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException("That person does not exist in our library!");
             }
 
             person.RentBook(book);
@@ -46,16 +51,16 @@ namespace Library.FilipVujeva.Services
         {
             var book = await _context.Books.GetAsync(bookId);
 
+            var person = await _context.People.GetWithRentedBooksById(personId);
+
             if (book == null)
             {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException("That book does not exist in our library!");
             }
-
-            var person = await _context.People.GetWithRentedBooksById(personId);
 
             if (person == null)
             {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException("That person does not exist in our library!");
             }
 
             person.ReturnBook(bookId);
