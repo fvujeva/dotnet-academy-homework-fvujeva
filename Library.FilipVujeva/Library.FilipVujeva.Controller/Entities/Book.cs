@@ -9,7 +9,7 @@ namespace Library.FilipVujeva.Contracts.Entities
         public string Authors { get; set; } = default!;
         public Genre Genre { get; set; } = default!;
         public int Quantity { get; set; } = default!;
-        public List<Person> People { get; }
+        public List<PersonBook> PersonBooks { get; }
 
         public Book(int id, string title, string authors, Genre genre, int quantity)
         {
@@ -18,17 +18,17 @@ namespace Library.FilipVujeva.Contracts.Entities
             Authors = authors;
             Genre = genre;
             Quantity = quantity;
-            if (People == null)
+            if (PersonBooks == null)
             {
-                People = new List<Person>();
+                PersonBooks = new List<PersonBook>();
             }
         }
 
         private Book()
         {
-            if (People == null)
+            if (PersonBooks == null)
             {
-                People = new List<Person>();
+                PersonBooks = new List<PersonBook>();
             }
         }
 

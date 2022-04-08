@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.FilipVujeva.Data.Db
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.FilipVujeva.Contracts.Tests", "Library.FilipVujeva.Contracts.Tests\Library.FilipVujeva.Contracts.Tests.csproj", "{11EC5828-FE68-4111-A2E3-43F0426E257A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.FilipVujeva.Services.Tests", "Library.FilipVujeva.Services.Tests\Library.FilipVujeva.Services.Tests.csproj", "{10A1C22C-5290-4975-AFAC-EA8CC264D047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.FilipVujeva.Services.Tests", "Library.FilipVujeva.Services.Tests\Library.FilipVujeva.Services.Tests.csproj", "{10A1C22C-5290-4975-AFAC-EA8CC264D047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.FilipVujeva.Functions", "Library.FilipVujeva.Functions\Library.FilipVujeva.Functions.csproj", "{8DF56AE8-E9FF-4710-B364-035AE3FB2982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{10A1C22C-5290-4975-AFAC-EA8CC264D047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A1C22C-5290-4975-AFAC-EA8CC264D047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10A1C22C-5290-4975-AFAC-EA8CC264D047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DF56AE8-E9FF-4710-B364-035AE3FB2982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DF56AE8-E9FF-4710-B364-035AE3FB2982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DF56AE8-E9FF-4710-B364-035AE3FB2982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DF56AE8-E9FF-4710-B364-035AE3FB2982}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

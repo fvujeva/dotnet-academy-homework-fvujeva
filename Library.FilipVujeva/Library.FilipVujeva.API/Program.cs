@@ -18,6 +18,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.IPeopleService, Library.FilipVujeva.Services.PeopleService>();
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.ILibraryService, Library.FilipVujeva.Services.LibraryService>();
+builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.IEmailService, Library.FilipVujeva.Services.EmailService>();
+builder.Services.AddScoped<Library.FilipVujeva.Contracts.Services.ILibraryNotificationService, Library.FilipVujeva.Services.LibraryNotificationService>();
 
 builder.Services.AddScoped<Library.FilipVujeva.Contracts.Repositories.IUnitOfWork, Library.FilipVujeva.Data.Db.Repositories.UnitOfWork>();
 

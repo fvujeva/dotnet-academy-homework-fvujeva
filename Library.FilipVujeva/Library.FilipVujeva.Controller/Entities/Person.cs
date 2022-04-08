@@ -22,13 +22,13 @@ namespace Library.FilipVujeva.Contracts.Entities
 
         public string FullName => $"{FirstName} {LastName}";
 
-        public List<Book> RentedBooks { get; }
+        public List<PersonBook> RentedBooks { get; }
 
         public Person()
         {
             if (RentedBooks == null)
             {
-                RentedBooks = new List<Book>();
+                RentedBooks = new List<PersonBook>();
             }
         }
 
@@ -42,20 +42,21 @@ namespace Library.FilipVujeva.Contracts.Entities
             UserName = firstName;
             if (RentedBooks == null)
             {
-                RentedBooks = new List<Book>();
+                RentedBooks = new List<PersonBook>();
             }
         }
 
         public void RentBook(Book book)
         {
             const int maxNumberOfBooks = 4;
+            var personBook = new PersonBook(this, book);
 
             if (!book.IsAvailable())
             {
                 throw new BookNotAvailableException(book);
             }
 
-            if (RentedBooks.Contains(book))
+            if (RentedBooks.Find(p => p.Book == book) != null)
             {
                 throw new RentLimitException("You can't rent two of the same books at once!");
             }
@@ -66,21 +67,21 @@ namespace Library.FilipVujeva.Contracts.Entities
             }
             else
             {
-                RentedBooks.Add(book);
+                RentedBooks.Add(personBook);
                 book.RemoveFromShelf();
             }
         }
 
         public void ReturnBook(int bookId)
         {
-            var book = RentedBooks.Find(x => x.Id == bookId);
-            if (book == null)
+            var personBook = RentedBooks.Find(x => x.BookId == bookId);
+            if (personBook == null)
             {
                 throw new EntityNotFoundException("Oops, it looks like you are trying to return a book you didn't rent!");
             }
 
-            RentedBooks.Remove(book);
-            book.AddToShelf();
+            RentedBooks.Remove(personBook);
+            personBook.Book.AddToShelf();
         }
     }
 }

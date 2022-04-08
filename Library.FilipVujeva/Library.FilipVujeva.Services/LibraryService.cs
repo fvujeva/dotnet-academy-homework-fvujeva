@@ -24,7 +24,7 @@ namespace Library.FilipVujeva.Services
         {
             var person = await _context.People.GetWithRentedBooksById(personId);
 
-            return person.RentedBooks.ConvertAll<BookCatalogDTO>(book => book.ToCatalogDto());
+            return person.RentedBooks.ConvertAll<BookCatalogDTO>(personBook => personBook.Book.ToCatalogDto());
         }
 
         public async Task RentBook(int personId, int bookId)

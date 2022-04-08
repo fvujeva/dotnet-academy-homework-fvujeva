@@ -14,10 +14,14 @@ namespace Library.FilipVujeva.Data.Db.Repositories
         {
             var person = await _context.Where(person => person.Id == id)
                 .Include(person => person.RentedBooks)
-                .ThenInclude(person => person.People)
                 .SingleOrDefaultAsync();
 
             return person;
+        }
+
+        public async Task<IEnumerable<Person>> GetAllWithRentedBeforeDate(DateTime date)
+        {
+            return await _context.Include(p => p.RentedBooks.Where(b => b.DateRented < date)).ToListAsync();
         }
     }
 }
