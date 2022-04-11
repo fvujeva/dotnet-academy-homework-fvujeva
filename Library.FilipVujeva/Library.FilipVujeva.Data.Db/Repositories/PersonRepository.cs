@@ -10,17 +10,12 @@ namespace Library.FilipVujeva.Data.Db.Repositories
         {
         }
 
-        public async Task<Person> GetWithRentedBooksById(int id)
+        public async Task<Person?> GetWithRentedBooksById(int id)
         {
             var person = await _context.Where(person => person.Id == id)
                 .Include(person => person.RentedBooks)
                 .ThenInclude(person => person.People)
                 .SingleOrDefaultAsync();
-
-            if (person == null)
-            {
-                throw new Exception("Not Found!");
-            }
 
             return person;
         }

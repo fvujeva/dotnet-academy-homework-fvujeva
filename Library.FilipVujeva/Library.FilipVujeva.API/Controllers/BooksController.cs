@@ -1,6 +1,4 @@
-
 using Library.FilipVujeva.Contracts.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.FilipVujeva.API.Controllers

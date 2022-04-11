@@ -1,5 +1,3 @@
-using Library.FilipVujeva.Contracts.Entities;
-
 namespace Library.FilipVujeva.Contracts.Dtos
 {
     public class BookCatalogDTO
